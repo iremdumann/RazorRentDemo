@@ -14,7 +14,11 @@ namespace RazorRentDemo.Data
         {
         }
 
-        public DbSet<RazorRentDemo.Model.Car> Car { get; set; } = default!;
+
+        public DbSet<Car> Car { get; set; } = default!;
+        public DbSet<Reservation> Reservations { get; set; }
+        public object Cars { get; internal set; }
+
 
         //Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
