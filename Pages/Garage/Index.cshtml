@@ -3,17 +3,18 @@
 
 @{
     ViewData["Title"] = "GARAJ";
+   
 }
 
-<h1>GARAJ</h1>
+<h1 class="display-6">GARAJ</h1>
 
 <p>
     <a asp-page="Create" class="btn btn-primary">Add New Car</a>
 </p>
-<table class="table">
+<table id="garageTable" class="table table-info"  >
     <thead>
-        <tr>
-            <th>
+        <tr >
+            <th  >
                 Brand
             </th>
             <th>
@@ -42,11 +43,21 @@
                     @result
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<partial name="_Notification" />
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#garageTable').DataTable();
+        });
+    </script>
+    }

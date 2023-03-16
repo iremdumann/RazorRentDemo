@@ -57,7 +57,12 @@ namespace RazorRentDemo.Pages.Garage
                 await _context.SaveChangesAsync();
             }
 
+            TempData["success"] = "Delete succesfully";
+
             return RedirectToPage("./Index");
+
         }
+
     }
+
 }

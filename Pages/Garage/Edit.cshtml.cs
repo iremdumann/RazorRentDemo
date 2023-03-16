@@ -57,7 +57,7 @@ namespace RazorRentDemo.Pages.Garage
             catch (DbUpdateConcurrencyException)
             {
                 if (!CarExists(Car.Id))
-                {
+                { 
                     return NotFound();
                 }
                 else
@@ -65,7 +65,8 @@ namespace RazorRentDemo.Pages.Garage
                     throw;
                 }
             }
-
+            TempData["success"] = "Updated succesfully";
+            TempData["error"] = " problem!!";
             return RedirectToPage("./Index");
         }
 

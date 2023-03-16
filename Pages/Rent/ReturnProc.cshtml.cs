@@ -18,9 +18,13 @@ namespace RazorRentDemo.Pages.Rent
             _context = context;
         }
 
+        // reservation id !!! primary key
         public IActionResult OnGet(int id)
         {
-            Reservation = _context.Reservations.Include(c => c.Car).FirstOrDefault(d => d.Id == id);
+            Reservation = _context
+                .Reservations
+                .Include(c => c.Car)
+                .FirstOrDefault(d => d.Id == id);
 
             if (Reservation is not null)
             {
@@ -32,7 +36,8 @@ namespace RazorRentDemo.Pages.Rent
             return NotFound();
         }
 
-        public IActionResult OnGetReturnOK(int id) //resevation id !! primary key
+        // asp-page-handler
+        public IActionResult OnGetReturnOK(int id)
         {
             var res = _context.Reservations.Include(c => c.Car).FirstOrDefault(d => d.Id == id);
 
@@ -45,16 +50,21 @@ namespace RazorRentDemo.Pages.Rent
                 _context.Reservations.Update(res);
                 _context.SaveChanges();
 
-                return RedirectToPage("ReturnFinal", new { res.TotalPrice });
+                return RedirectToPage("index");
             }
 
             return NotFound();
         }
-
+        public IActionResult Test()
+        {
+            ViewData["TESTDATAKEY"] = "TESTDATA";
+            return Page();
+        }
         private int CalculatePrice(Reservation r)
         {
             var duration = r.End - r.Start;
             var p = (int)duration.TotalMinutes * r.Car.UnitPrice;
+
             return p;
         }
     }
